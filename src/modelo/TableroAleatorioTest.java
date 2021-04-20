@@ -12,10 +12,17 @@ class TableroAleatorioTest {
 	@Test
 	void testTableroAleatorioContarMinasalrededor() {
 		// Tantas como minas
-		ArrayList<Coordenada> posiciones = null;
+		ArrayList<Coordenada> posiciones = new ArrayList<Coordenada>();
 		// lo que decidais de lado de Dificultad
 //		Ejemplo de la pizarra
 		// minas en {0,0},{1,2},{2,2}
+		Coordenada coord1 = new Coordenada(0, 0);
+		Coordenada coord2 = new Coordenada(1, 2);
+		Coordenada coord3 = new Coordenada(2, 2);
+		posiciones.add(coord1);
+		posiciones.add(coord2);
+		posiciones.add(coord3);
+
 		TableroAleatorio tableroAleatorio = new TableroAleatorio(4, posiciones);
 		int tablero[][] = { {0,2,1,1}, {1,3,0,2}, {0,2,0,2}, {0,1,1,1} };
 		for (int i = 0; i < tablero.length; i++) {
