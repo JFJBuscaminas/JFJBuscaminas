@@ -3,8 +3,12 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
+import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
+import modelo.TableroAleatorio;
 import vista.UI;
 
 public class ParaUI extends UI {
@@ -26,8 +30,11 @@ public class ParaUI extends UI {
 				System.out.println(dificultad.getLongitud());
 				controlador.dameValores(densidad, dificultad);
 //				jPanelOpciones.getCmbDensidad();
+				tablero = new TableroAleatorio(dificultad.getLongitud(), 5);
+				addBotones(dificultad.getLongitud());
+				
 			}
-		});		
+		});	
 	}
 
 }
