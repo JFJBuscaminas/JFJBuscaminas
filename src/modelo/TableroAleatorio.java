@@ -40,6 +40,27 @@ public class TableroAleatorio extends Tablero {
 		}
 		
 	}
+	
+	public boolean desvelarCasillas(Coordenada coord) {
+		
+		if(getCasilla(coord).isVelada() && (getCasilla(coord).isMina() || getCasilla(coord).getMinasAlrededor() > 0)) {
+			getCasilla(coord).setVelada(false);
+			return false;
+		}	
+		
+				for (int i = coord.getPosX()-1; i <= coord.getPosX()+1; i++) {
+					for (int j = coord.getPosY()-1; j <= coord.getPosY()+1; j++) {
+						if(i>=0 && j >= 0 && i< getAlto() && j< getAncho() && getCasilla(coord).isVelada()) {
+							Casilla casilla = getCasilla(coord);
+							casilla.setVelada(false);
+							return desvelarCasillas(new Coordenada(i, j));
+						}
+					}
+				}
+			return false;
+	}
+	
+	
 
 	private void colocarMinas(ArrayList<Coordenada> posiciones) {
 		for (Coordenada coordenada : posiciones) {
