@@ -42,25 +42,25 @@ public class TableroAleatorio extends Tablero {
 	}
 	
 	public boolean desvelarCasillas(Coordenada coord) {
-		if(getCasilla(coord).isVelada()) {
-			System.out.println(coord.getPosX()+":"+coord.getPosY()+", esta oculta");
-			getCasilla(coord).setVelada(false);
-			if(getCasilla(coord).isMina()) {
-				System.out.println(coord.getPosX()+":"+coord.getPosY()+", es mina");
+		Casilla casilla = getCasilla(coord);
+		if(casilla.isVelada()) {
+			System.out.println("es velada");
+			casilla.setVelada(false);
+			if(casilla.isMina()) {
+				System.out.println("Es mina");
 				return false;
-			}else if(getCasilla(coord).getMinasAlrededor() > 0){
-				System.out.println(coord.getPosX()+":"+coord.getPosY()+", es > 0");
-				return false;
-			}else {
-				for (int i = coord.getPosX()-1; i <= coord.getPosX()+1; i++) {
-					for (int j = coord.getPosY()-1; j <= coord.getPosY()-1; j++) {
-						System.out.println(i+":"+j+", es 0");
-						if(i>=0 && j >= 0 && i<= getAlto() && j <= getAncho()){
-							System.out.println(i+":"+j+", es 0 y dentro limites");
-							return desvelarCasillas(coord);
+			}else if(casilla.getMinasAlrededor() == 0) {
+				for (int i = coord.getPosX()-1; i < coord.getPosX()+1; i++) {
+					for (int j = coord.getPosY()-1; j < coord.getPosY()+1; j++) {
+						if(i>=0 && j >= 0 && i<= getAlto() && j <= getAncho() && casilla.getMinasAlrededor() == 0){
+							System.out.println("Es 0");
+							return desvelarCasillas(new Coordenada(i, j));
 						}
 					}
-				}
+				}	
+			} else if(casilla.getMinasAlrededor() > 0) {
+				System.out.println("Es mayor que 0");
+				return false;
 			}
 		}
 		return false;
