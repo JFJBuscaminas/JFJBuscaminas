@@ -18,6 +18,7 @@ public class TableroAleatorio extends Tablero {
 		super(lado);
 		disponerTablero(posiciones);
 	}
+	
 	private void disponerTablero(ArrayList<Coordenada> posiciones) {
 		colocarMinas(posiciones);
 		contarMinasAlrededor(posiciones);
