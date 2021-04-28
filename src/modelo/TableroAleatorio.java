@@ -72,7 +72,8 @@ public class TableroAleatorio extends Tablero {
 					}
 				}
 			}
-		}else {
+		} else {
+			if(getCasilla(lugar).getMinasAlrededor() == 100){
 			//si alrededor tiene tantas casillas marcadas como minas alrededor
 			//tiene la propia casilla
 			//si el caso anterior es negativo NADA QUE HACER
@@ -89,8 +90,24 @@ public class TableroAleatorio extends Tablero {
 			}
 			
 		}
+		}
 	}
 
+	public int contarMarcadasAlrededor(Coordenada coordenada) {
+		int alrededor = 8;
+		int marcada = 0;
+		for (int i = 0; i < alrededor; i++) {
+			int[] coordenada2 = Utiles.damePosicionAlrededor(i);
+			Coordenada lugarRelativo = new Coordenada(coordenada.getPosX() + coordenada2[0], 
+					coordenada.getPosY() + coordenada2[1]);
+			if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
+				if(getCasilla(lugarRelativo).isMarcada()) {
+					marcada = marcada++;
+				}
+			}
+		}
+		return marcada;
+	}
 	
 
 	private void colocarMinas(ArrayList<Coordenada> posiciones) {
