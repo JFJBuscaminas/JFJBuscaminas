@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import utiles.Utiles;
 
 public class TableroAleatorio extends Tablero {
-
+	private boolean terminado = false;
+	
 	//Constructor aleatorio
 	public TableroAleatorio(int lado, int minas) {
 		super(lado);
@@ -42,31 +43,54 @@ public class TableroAleatorio extends Tablero {
 		
 	}
 	
-	public boolean desvelarCasillas(Coordenada coord) {
-		Casilla casilla = getCasilla(coord);
-		if(casilla.isVelada()) {
-			System.out.println("es velada");
-			casilla.setVelada(false);
-			if(casilla.isMina()) {
-				System.out.println("Es mina");
-				return false;
-			}else if(casilla.getMinasAlrededor() == 0) {
-				for (int i = coord.getPosX()-1; i < coord.getPosX()+1; i++) {
-					for (int j = coord.getPosY()-1; j < coord.getPosY()+1; j++) {
-						if(i>=0 && j >= 0 && i<= getAlto() && j <= getAncho() && casilla.getMinasAlrededor() == 0){
-							System.out.println("Es 0");
-							return desvelarCasillas(new Coordenada(i, j));
-						}
-					}
-				}	
-			} else if(casilla.getMinasAlrededor() > 0) {
-				System.out.println("Es mayor que 0");
-				return false;
+	public boolean[][] getCasillasDesveladas() {
+		boolean resultados[][] = new boolean[getAlto()][getAncho()];
+		for (int i = 0; i < resultados.length; i++) {
+			for (int j = 0; j < resultados[i].length; j++) {
+				resultados[i][j] = getCasilla(new Coordenada(i, j)).isVelada();
 			}
 		}
-		return false;
+		return resultados;
 	}
 	
+	public void desvelarContiguas(Coordenada lugar) {
+		if (getCasilla(lugar).isVelada()&&!getCasilla(lugar).isMarcada()) {
+			getCasilla(lugar).setVelada(false);
+			if (getCasilla(lugar).isMina()) {
+				this.terminado = true;
+			} else {
+				if (getCasilla(lugar).getMinasAlrededor() == 0) {
+					// proceso recursivo
+					int alrededor = 8;
+					for (int i = 0; i < alrededor; i++) {
+						int[] coordenada = Utiles.damePosicionAlrededor(i);
+						Coordenada lugarRelativo = new Coordenada(lugar.getPosX() + coordenada[0],
+								lugar.getPosY() + coordenada[1]);
+						if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
+							desvelarContiguas(lugarRelativo);
+						}
+					}
+				}
+			}
+		}else {
+			//si alrededor tiene tantas casillas marcadas como minas alrededor
+			//tiene la propia casilla
+			//si el caso anterior es negativo NADA QUE HACER
+			//si es positivo
+			//repito el proceso de arriba
+			int alrededor = 8;
+			for (int i = 0; i < alrededor; i++) {
+				int[] coordenada = Utiles.damePosicionAlrededor(i);
+				Coordenada lugarRelativo = new Coordenada(lugar.getPosX() + coordenada[0],
+						lugar.getPosY() + coordenada[1]);
+				if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
+					desvelarContiguas(lugarRelativo);
+				}
+			}
+			
+		}
+	}
+
 	
 
 	private void colocarMinas(ArrayList<Coordenada> posiciones) {
