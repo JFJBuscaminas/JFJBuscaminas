@@ -1,5 +1,6 @@
 package modelo;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -49,26 +50,22 @@ class TableroAleatorioTest {
 		}
 	}
 	
+	
 	@Test
-	void testDesvelarCasilla() {
+	void testDesvelarCasillas() {
 		ArrayList<Coordenada> posiciones = new ArrayList<Coordenada>();
 		// lo que decidais de lado de Dificultad
 //		Ejemplo de la pizarra
 		// minas en {0,0},{1,2},{2,2}
-		Coordenada coord1 = new Coordenada(0, 0);
-		Coordenada coord2 = new Coordenada(1, 2);
-		Coordenada coord3 = new Coordenada(2, 2);
-		posiciones.add(coord1);
-		posiciones.add(coord2);
-		posiciones.add(coord3);
+		posiciones.add(new Coordenada(0, 0));
+		posiciones.add(new Coordenada(1, 2));
+		posiciones.add(new Coordenada(2, 2));
 
 		TableroAleatorio tableroAleatorio = new TableroAleatorio(4, posiciones);
-//		int tablero[][] = { {0,2,1,1}, {1,3,0,2}, {0,2,0,2}, {0,1,1,1} };
-		boolean comprobar[][] = { {false,false,false,false}, {false,false,false,false}, {true,false,false,false}, {true,false,false,false} };
-		for (int i = 0; i < comprobar.length; i++) {
-			for (int j = 0; j < comprobar[0].length; j++) {
-				assertEquals(comprobar[i][j], tableroAleatorio.desvelarCasillas(new Coordenada(i, j)));
-			}
-		}
+		Coordenada desvelada = new Coordenada(3, 0);
+		boolean tablero[][] = { { true, true, true, true }, { false, false, true, true }, { false, false, true, true },
+				{ false, false, true, true } };
+		tableroAleatorio.desvelarContiguas(desvelada);
+		assertArrayEquals(tablero, tableroAleatorio.getCasillasDesveladas());
 	}
 }
