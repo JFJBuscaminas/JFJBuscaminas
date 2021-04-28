@@ -28,6 +28,7 @@ public class Casilla {
 	public void setMarcada(boolean marcada) {
 		this.marcada = marcada;
 	}
+	
 	public int getMinasAlrededor() {
 		return minasAlrededor;
 	}
