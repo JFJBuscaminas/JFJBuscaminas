@@ -11,6 +11,7 @@ import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.TableroAleatorio;
+import utiles.RespuestaColocacion;
 import vista.UI;
 
 public class ParaUI extends UI {
@@ -19,15 +20,8 @@ public class ParaUI extends UI {
 
 	public ParaUI() {
 		super();
-		this.iniciarJuego();
-		controlador=new Controlador();
-		// leyes de demeter
-		// para solucionar esto es crear metodos delegados
-//		jPanelOpciones.btnIniciar.addActionListener(l);
-	}
-	private void iniciarJuego() {
 		this.jugar();
-		
+		controlador=new Controlador();
 	}
 	
 	
@@ -44,6 +38,7 @@ public class ParaUI extends UI {
 			}
 		});	
 	}
+	
 	private void asociarBotones() {
 		for (int i = 0; i < this.botonera.getAlto(); i++) {
 			for (int j = 0; j < this.botonera.getAncho(); j++) {
@@ -54,7 +49,12 @@ public class ParaUI extends UI {
 						super.mouseClicked(e);
 						if(e.getButton()==1) {
 							System.out.println("boton izquierdo");
+							JButton boton = (JButton) e.getSource();
+							Coordenada coordenada2 = botonera.getCoordenada(boton);
+							RespuestaColocacion respuestaBoton = controlador.desvelarCasillas(coordenada2);
+							boton.setText(respuestaBoton.getMensaje());
 						}
+							
 						if(e.getButton()==3) {
 							System.out.println("boton derecho");
 							JButton boton = (JButton) e.getSource();
