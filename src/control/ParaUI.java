@@ -52,7 +52,8 @@ public class ParaUI extends UI {
 							JButton boton = (JButton) e.getSource();
 							Coordenada coordenada2 = botonera.getCoordenada(boton);
 							RespuestaColocacion respuestaBoton = controlador.desvelarCasillas(coordenada2);
-							boton.setText(respuestaBoton.getMensaje());
+							boton = botonera.getButton(respuestaBoton.getCoordenada());
+							boton.setText(respuestaBoton.getMensaje());		
 						}
 							
 						if(e.getButton()==3) {

@@ -20,14 +20,25 @@ public class GestionDatos {
 	}
 	public RespuestaColocacion desvelarCasillas(Coordenada coord) {
 		if(tableroAleatorio.getCasilla(coord).isMina()) {
-			return new RespuestaColocacion(true, "M");
-		}else {
-			return new RespuestaColocacion(true, String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()));
+			return new RespuestaColocacion(true, "M", coord);
+		} else {
+			for (int i = coord.getPosX(); i < tableroAleatorio.getAlto(); i++) {
+				for (int j = coord.getPosY(); j < tableroAleatorio.getAncho(); j++) {
+					tableroAleatorio.desvelarContiguas(coord);
+					if(!tableroAleatorio.getCasilla(new Coordenada(i, j)).isVelada())
+						return new RespuestaColocacion(true, String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()), new Coordenada(i, j));
+				}
+			}
 		}
+		return new RespuestaColocacion(false, "", coord);
+		
 	}
-	public boolean[][] desvelarCeros(){
-		return this.tableroAleatorio.getCasillasDesveladas();
-	}
+//	public void desvelarCeros(Coordenada coord){
+//		tableroAleatorio.desvelarContiguas(coord);
+//	}
+//	public boolean isVelada(Coordenada coord) {
+//		return tableroAleatorio.isVelada(coord);
+//	}
 	
 
 	
