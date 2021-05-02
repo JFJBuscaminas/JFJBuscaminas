@@ -149,4 +149,5 @@ public class TableroAleatorio extends Tablero {
 		}
 		return false;
 	}
+
 }

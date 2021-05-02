@@ -23,8 +23,6 @@ public class Controlador {
 	public RespuestaColocacion desvelarCasillas(Coordenada coord) {
 		return this.gestion.desvelarCasillas(coord);
 	}
-	public boolean[][] desvelarCeros() {
-		return this.gestion.desvelarCeros();
-	}
+
 	
 }
