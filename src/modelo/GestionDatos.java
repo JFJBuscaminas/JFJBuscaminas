@@ -33,12 +33,7 @@ public class GestionDatos {
 		return new RespuestaColocacion(false, "", coord);
 		
 	}
-//	public void desvelarCeros(Coordenada coord){
-//		tableroAleatorio.desvelarContiguas(coord);
-//	}
-//	public boolean isVelada(Coordenada coord) {
-//		return tableroAleatorio.isVelada(coord);
-//	}
+
 	
 
 	

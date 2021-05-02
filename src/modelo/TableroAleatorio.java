@@ -149,11 +149,5 @@ public class TableroAleatorio extends Tablero {
 		}
 		return false;
 	}
-//	public boolean isVelada(Coordenada coord) {
-//		if(getCasilla(coord).isVelada()) {
-//			return true;
-//		}else {
-//			return false;
-//		}
-//	}
+
 }
