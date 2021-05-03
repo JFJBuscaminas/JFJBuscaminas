@@ -5,6 +5,7 @@ import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.GestionDatos;
 import utiles.RespuestaColocacion;
+import utiles.RespuestaDesvelo;
 
 public class Controlador {
 	
@@ -20,8 +21,11 @@ public class Controlador {
 		gestion.crearTablero(tamaño, minas);
 	}
 	
-	public RespuestaColocacion desvelarCasillas(Coordenada coord) {
-		return this.gestion.desvelarCasillas(coord);
+	public RespuestaDesvelo casillasDesveladasTablero() {
+		return this.gestion.getRespuestaDesvelo();
+	}
+	public void desvelarCasillas(Coordenada coord) {
+		gestion.desvelarCasillas(coord);
 	}
 
 	
