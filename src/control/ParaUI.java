@@ -45,6 +45,11 @@ public class ParaUI extends UI {
 			for (int j = 0; j < this.botonera.getAncho(); j++) {
 				Coordenada coordenada = new Coordenada(i, j);
 				boolean veloPosicion = respuestaDesvelo.getVeloPosicion(coordenada);
+				RespuestaDesvelo contarMinasCasilla = controlador.contarMinasCasilla(coordenada);
+				if(!veloPosicion) {
+					JButton boton = botonera.getButton(coordenada);
+					boton.setText(contarMinasCasilla.getMensaje());
+				}
 				//Y aqui desvelas o no el boton
 //				botonera.getButton(coordenada).setText(veloPosicion);
 			}
@@ -65,8 +70,8 @@ public class ParaUI extends UI {
 							Coordenada coordenada2 = botonera.getCoordenada(boton);
 							
 							controlador.desvelarCasillas(coordenada2);
-							pintaBotones(controlador.casillasDesveladasTablero());
-							}
+							pintaBotones(controlador.getRespuestaDesvelo());
+						}
 							
 						if(e.getButton()==3) {
 							System.out.println("boton derecho");
