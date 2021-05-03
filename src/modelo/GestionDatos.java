@@ -1,6 +1,6 @@
 package modelo;
 
-import utiles.RespuestaColocacion;
+import utiles.RespuestaDesvelo;
 
 public class GestionDatos {
 
@@ -18,20 +18,20 @@ public class GestionDatos {
 	public int cantidadMinas(int tamaño, int minas) {
 		return ((tamaño*tamaño)*minas)/100;
 	}
-	public RespuestaColocacion desvelarCasillas(Coordenada coord) {
-		if(tableroAleatorio.getCasilla(coord).isMina()) {
-			return new RespuestaColocacion(true, "M", coord);
-		} else {
-			for (int i = coord.getPosX(); i < tableroAleatorio.getAlto(); i++) {
-				for (int j = coord.getPosY(); j < tableroAleatorio.getAncho(); j++) {
-					tableroAleatorio.desvelarContiguas(coord);
-					if(!tableroAleatorio.getCasilla(new Coordenada(i, j)).isVelada())
-						return new RespuestaColocacion(true, String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()), new Coordenada(i, j));
-				}
+	
+	public RespuestaDesvelo getRespuestaDesvelo() {
+		RespuestaDesvelo respuesta=new RespuestaDesvelo(tableroAleatorio.getAlto());
+		for (int i = 0; i < tableroAleatorio.getAlto(); i++) {
+			for (int j = 0; j < tableroAleatorio.getAlto(); j++) {
+				Coordenada coord = new Coordenada(i, j);
+				respuesta.setVeloPosicion(coord, tableroAleatorio.getCasilla(coord).isVelada());
 			}
 		}
-		return new RespuestaColocacion(false, "", coord);
-		
+		return respuesta;
+	}
+
+	public void desvelarCasillas(Coordenada coord) {
+		tableroAleatorio.desvelarContiguas(coord);
 	}
 
 	

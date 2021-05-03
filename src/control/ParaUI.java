@@ -12,6 +12,7 @@ import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.TableroAleatorio;
 import utiles.RespuestaColocacion;
+import utiles.RespuestaDesvelo;
 import vista.UI;
 
 public class ParaUI extends UI {
@@ -39,6 +40,17 @@ public class ParaUI extends UI {
 		});	
 	}
 	
+	public void pintaBotones(RespuestaDesvelo respuestaDesvelo) {
+		for (int i = 0; i < this.botonera.getAlto(); i++) {
+			for (int j = 0; j < this.botonera.getAncho(); j++) {
+				Coordenada coordenada = new Coordenada(i, j);
+				boolean veloPosicion = respuestaDesvelo.getVeloPosicion(coordenada);
+				//Y aqui desvelas o no el boton
+//				botonera.getButton(coordenada).setText(veloPosicion);
+			}
+		}
+	}
+	
 	private void asociarBotones() {
 		for (int i = 0; i < this.botonera.getAlto(); i++) {
 			for (int j = 0; j < this.botonera.getAncho(); j++) {
@@ -51,10 +63,10 @@ public class ParaUI extends UI {
 							System.out.println("boton izquierdo");
 							JButton boton = (JButton) e.getSource();
 							Coordenada coordenada2 = botonera.getCoordenada(boton);
-							RespuestaColocacion respuestaBoton = controlador.desvelarCasillas(coordenada2);
-							boton = botonera.getButton(respuestaBoton.getCoordenada());
-							boton.setText(respuestaBoton.getMensaje());		
-						}
+							
+							controlador.desvelarCasillas(coordenada2);
+							pintaBotones(controlador.casillasDesveladasTablero());
+							}
 							
 						if(e.getButton()==3) {
 							System.out.println("boton derecho");
