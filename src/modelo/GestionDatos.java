@@ -33,8 +33,14 @@ public class GestionDatos {
 	public void desvelarCasillas(Coordenada coord) {
 		tableroAleatorio.desvelarContiguas(coord);
 	}
-
 	
+	public RespuestaDesvelo contarMinasCasilla(Coordenada coord) {
+		if(tableroAleatorio.getCasilla(coord).isMina()) {
+			return new RespuestaDesvelo("M");
+		} else {
+			return new RespuestaDesvelo(String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()));
+		}
+	}
 
 	
 	
