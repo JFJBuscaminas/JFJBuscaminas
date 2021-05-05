@@ -11,7 +11,6 @@ import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.TableroAleatorio;
-import utiles.RespuestaColocacion;
 import utiles.RespuestaDesvelo;
 import vista.UI;
 
@@ -77,6 +76,12 @@ public class ParaUI extends UI {
 							System.out.println("boton derecho");
 							JButton boton = (JButton) e.getSource();
 							Coordenada coordenada2 = botonera.getCoordenada(boton);
+							controlador.marcarCasilla(coordenada2);
+//							if(!boton.isEnabled()) {
+//								boton.setEnabled(true);
+//								boton.setText("");
+//							}
+//							boton.setEnabled(false);
 							boton.setText("X");
 							//Conmutar el valor de marcada en la casilla
 //							tablero.getCasilla(coordenada2).setMarcada(!tablero.getCasilla(coordenada2).isMarcada());
