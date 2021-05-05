@@ -73,28 +73,33 @@ public class TableroAleatorio extends Tablero {
 				}
 			}
 		} else {
+			contarMarcadasAlrededor(lugar);
 			if(getCasilla(lugar).getMinasAlrededor() == getCasilla(lugar).getMarcadasAlrededor() && getCasilla(lugar).getMinasAlrededor() != 0 && !getCasilla(lugar).isVelada()){
+				System.out.println("Hola");
 			//si alrededor tiene tantas casillas marcadas como minas alrededor
 			//tiene la propia casilla
 			//si el caso anterior es negativo NADA QUE HACER
 			//si es positivo
 			//repito el proceso de arriba
-			int alrededor = 8;
-			for (int i = 0; i < alrededor; i++) {
-				int[] coordenada = Utiles.damePosicionAlrededor(i);
-				Coordenada lugarRelativo = new Coordenada(lugar.getPosX() + coordenada[0],
-						lugar.getPosY() + coordenada[1]);
-				if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
-					desvelarContiguas(lugarRelativo);
+				int alrededor = 8;
+				for (int i = 0; i < alrededor; i++) {
+					int[] coordenada = Utiles.damePosicionAlrededor(i);
+					Coordenada lugarRelativo = new Coordenada(lugar.getPosX() + coordenada[0],
+							lugar.getPosY() + coordenada[1]);
+					if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
+						getCasilla(lugarRelativo).setVelada(false);
+						System.out.println(getCasilla(lugarRelativo).isVelada());
+						desvelarContiguas(lugarRelativo);
+					}
 				}
-			}
 			
-		}
+			}
 		}
 	}
 
 	public void contarMarcadasAlrededor(Coordenada coordenada) {
 		
+		// hay que traer la coord de la marcada y a partir de esa sumar 1 a su alrededor
 		for (int i = coordenada.getPosX()-1; i <= coordenada.getPosX()+1; i++) {
 			for (int j = coordenada.getPosY()-1; j <= coordenada.getPosY()+1; j++) {
 				if(i>=0 && j >= 0 && i< getAlto() && j< getAncho()) {
@@ -106,6 +111,10 @@ public class TableroAleatorio extends Tablero {
 				}
 			}
 		}
+	}
+	
+	public void marcarCasilla(Coordenada coord) {
+		getCasilla(coord).setMarcada(true);
 	}
 	
 

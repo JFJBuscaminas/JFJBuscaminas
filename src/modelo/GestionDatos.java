@@ -41,7 +41,10 @@ public class GestionDatos {
 			return new RespuestaDesvelo(String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()));
 		}
 	}
-
+	
+	public void marcarCasilla(Coordenada coord) {
+		tableroAleatorio.marcarCasilla(coord);
+	}
 	
 	
 }

@@ -4,7 +4,6 @@ import modelo.Coordenada;
 import modelo.Densidad;
 import modelo.Dificultad;
 import modelo.GestionDatos;
-import utiles.RespuestaColocacion;
 import utiles.RespuestaDesvelo;
 
 public class Controlador {
@@ -30,5 +29,9 @@ public class Controlador {
 
 	public RespuestaDesvelo contarMinasCasilla(Coordenada coord) {
 		return gestion.contarMinasCasilla(coord);
+	}
+	
+	public void marcarCasilla(Coordenada coord) {
+		gestion.marcarCasilla(coord);
 	}
 }
