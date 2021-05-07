@@ -86,12 +86,12 @@ public class TableroAleatorio extends Tablero {
 					Coordenada lugarRelativo = new Coordenada(lugar.getPosX() + coordenada[0],
 							lugar.getPosY() + coordenada[1]);
 					if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
-						getCasilla(lugarRelativo).setVelada(false);
+//						getCasilla(lugarRelativo).setVelada(false);
 						if(getCasilla(lugarRelativo).isMina()) {
 							getCasilla(lugarRelativo).setVelada(true);
 						}
-						this.acabado = true;
 						desvelarContiguas(lugarRelativo);
+						this.acabado = true;
 					}
 				}
 				this.acabado = false;
