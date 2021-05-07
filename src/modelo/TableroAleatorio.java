@@ -6,6 +6,7 @@ import utiles.Utiles;
 
 public class TableroAleatorio extends Tablero {
 	private boolean terminado = false;
+	private boolean acabado = false;
 	
 	//Constructor aleatorio
 	public TableroAleatorio(int lado, int minas) {
@@ -73,9 +74,7 @@ public class TableroAleatorio extends Tablero {
 				}
 			}
 		} else {
-			contarMarcadasAlrededor(lugar);
-			if(getCasilla(lugar).getMinasAlrededor() == getCasilla(lugar).getMarcadasAlrededor() && getCasilla(lugar).getMinasAlrededor() != 0 && !getCasilla(lugar).isVelada()){
-				System.out.println("Hola");
+			if(getCasilla(lugar).getMinasAlrededor() == getCasilla(lugar).getMarcadasAlrededor() && getCasilla(lugar).getMarcadasAlrededor()>0 && this.acabado == false){
 			//si alrededor tiene tantas casillas marcadas como minas alrededor
 			//tiene la propia casilla
 			//si el caso anterior es negativo NADA QUE HACER
@@ -88,10 +87,14 @@ public class TableroAleatorio extends Tablero {
 							lugar.getPosY() + coordenada[1]);
 					if (lugarRelativo.isInToLimits(getAncho(),getAlto())) {
 						getCasilla(lugarRelativo).setVelada(false);
-						System.out.println(getCasilla(lugarRelativo).isVelada());
+						if(getCasilla(lugarRelativo).isMina()) {
+							getCasilla(lugarRelativo).setVelada(true);
+						}
+						this.acabado = true;
 						desvelarContiguas(lugarRelativo);
 					}
 				}
+				this.acabado = false;
 			
 			}
 		}
@@ -104,7 +107,7 @@ public class TableroAleatorio extends Tablero {
 			for (int j = coordenada.getPosY()-1; j <= coordenada.getPosY()+1; j++) {
 				if(i>=0 && j >= 0 && i< getAlto() && j< getAncho()) {
 					Casilla casilla = getCasilla(new Coordenada(i, j));
-					if(casilla.isMarcada()) {
+					if(!casilla.isMarcada()) {
 						casilla.setMarcadasAlrededor(casilla.getMarcadasAlrededor()+1);
 					}
 					
@@ -115,6 +118,7 @@ public class TableroAleatorio extends Tablero {
 	
 	public void marcarCasilla(Coordenada coord) {
 		getCasilla(coord).setMarcada(true);
+		contarMarcadasAlrededor(coord);
 	}
 	
 

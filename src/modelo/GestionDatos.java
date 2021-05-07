@@ -36,9 +36,9 @@ public class GestionDatos {
 	
 	public RespuestaDesvelo contarMinasCasilla(Coordenada coord) {
 		if(tableroAleatorio.getCasilla(coord).isMina()) {
-			return new RespuestaDesvelo("M");
+			return new RespuestaDesvelo("M", true);
 		} else {
-			return new RespuestaDesvelo(String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()));
+			return new RespuestaDesvelo(String.valueOf(tableroAleatorio.getCasilla(coord).getMinasAlrededor()), false);
 		}
 	}
 	

@@ -21,6 +21,7 @@ public class UI extends JFrame {
 	
 	private JPanel contentPane;
 	public JPanelOpciones jPanelOpciones;
+	public JPanelReiniciar jPanelReiniciar;
 	private JTextField textField;
 	protected Botonera botonera;
 
@@ -38,6 +39,9 @@ public class UI extends JFrame {
 		
 		jPanelOpciones=new JPanelOpciones();
 		contentPane.add(jPanelOpciones, BorderLayout.SOUTH);
+		jPanelReiniciar = new JPanelReiniciar();
+		contentPane.add(jPanelReiniciar, BorderLayout.CENTER);
+		jPanelReiniciar.setVisible(false);
 		
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setBounds(100, 100, 450, 300);
@@ -71,4 +75,7 @@ public class UI extends JFrame {
 		return jPanelOpciones.getCmbDensidad();
 	}
 
+	public JButton getBtnReiniciar() {
+		return jPanelReiniciar.getBtnReiniciar();
+	}
 }
