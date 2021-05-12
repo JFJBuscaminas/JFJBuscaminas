@@ -46,5 +46,17 @@ public class GestionDatos {
 		tableroAleatorio.marcarCasilla(coord);
 	}
 	
+	private void desvelarMinas() {
+		for (int i = 0; i < tableroAleatorio.getAlto() ;i++) {
+			for (int j = 0; j < tableroAleatorio.getAncho(); j++) {
+				Coordenada casilla = new Coordenada(i, j);
+				if(tableroAleatorio.getCasilla(casilla).isMina()) {
+					tableroAleatorio.getCasilla(casilla).setVelada(false);
+				}
+			}
+			
+		}
+	}
+	
 	
 }

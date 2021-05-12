@@ -116,9 +116,30 @@ public class TableroAleatorio extends Tablero {
 		}
 	}
 	
+	public void descontarMarcadasAlrededor(Coordenada coordenada) {
+		
+		// hay que traer la coord de la marcada y a partir de esa sumar 1 a su alrededor
+		for (int i = coordenada.getPosX()-1; i <= coordenada.getPosX()+1; i++) {
+			for (int j = coordenada.getPosY()-1; j <= coordenada.getPosY()+1; j++) {
+				if(i>=0 && j >= 0 && i< getAlto() && j< getAncho()) {
+					Casilla casilla = getCasilla(new Coordenada(i, j));
+					if(!casilla.isMarcada()) {
+						casilla.setMarcadasAlrededor(casilla.getMarcadasAlrededor()-1);
+					}
+					
+				}
+			}
+		}
+	}
+	
 	public void marcarCasilla(Coordenada coord) {
-		getCasilla(coord).setMarcada(true);
-		contarMarcadasAlrededor(coord);
+		if(!getCasilla(coord).isMarcada() && getCasilla(coord).isVelada()) {
+			getCasilla(coord).setMarcada(true);
+			contarMarcadasAlrededor(coord);
+		}else {
+			getCasilla(coord).setMarcada(false);
+			descontarMarcadasAlrededor(coord);
+		}
 	}
 	
 
