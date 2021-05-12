@@ -56,6 +56,7 @@ public class UI extends JFrame {
 	public void addBotones(int longitud) {
 		botonera = new Botonera(longitud);
 		contentPane.add(botonera, BorderLayout.CENTER);
+		contentPane.revalidate();
 	}
 
 	public void tomaValores(Densidad densidad, Dificultad dificultad) {
