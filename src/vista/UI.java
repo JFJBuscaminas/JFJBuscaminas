@@ -39,9 +39,6 @@ public class UI extends JFrame {
 		
 		jPanelOpciones=new JPanelOpciones();
 		contentPane.add(jPanelOpciones, BorderLayout.SOUTH);
-		jPanelReiniciar = new JPanelReiniciar();
-		contentPane.add(jPanelReiniciar, BorderLayout.CENTER);
-		jPanelReiniciar.setVisible(false);
 		
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		setBounds(100, 100, 450, 300);
@@ -56,6 +53,11 @@ public class UI extends JFrame {
 	public void addBotones(int longitud) {
 		botonera = new Botonera(longitud);
 		contentPane.add(botonera, BorderLayout.CENTER);
+		contentPane.revalidate();
+	}
+	public void addReinicio() {
+		jPanelReiniciar = new JPanelReiniciar();
+		contentPane.add(jPanelReiniciar, BorderLayout.CENTER);
 		contentPane.revalidate();
 	}
 

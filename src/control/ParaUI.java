@@ -28,7 +28,19 @@ public class ParaUI extends UI {
 		controlador=new Controlador();
 	}
 	
-	
+//	private void Reiniciar() {
+//		getBtnReiniciar().addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				terminado = false;
+//				getBtnIniciar().setEnabled(true);
+//				getCmbDensidad().setEnabled(true);
+//				getCmbDificultad().setEnabled(true);
+//				jugar();
+//				
+//			}
+//		});
+//	}
 	private void jugar() {
 		
 		getBtnIniciar().addActionListener(new ActionListener() {
@@ -42,6 +54,7 @@ public class ParaUI extends UI {
 				controlador.crearTablero(dificultad.getLongitud(), densidad.getPorcentaje());
 				addBotones(dificultad.getLongitud());
 				asociarBotones();
+				
 			}
 		});	
 	}
@@ -56,20 +69,22 @@ public class ParaUI extends UI {
 				if(!veloPosicion) {
 					boton.setText(contarMinasCasilla.getMensaje());
 					if(contarMinasCasilla.isMina()) {
-						boton.setBackground(new Color(236, 21, 21));
 						for (int k = 0; k < this.botonera.getAlto(); k++) {
 							for (int k2 = 0; k2 < this.botonera.getAncho(); k2++) {
+								Coordenada mina = new Coordenada(k, k2);
+								RespuestaDesvelo desvelarMinas = controlador.contarMinasCasilla(mina);
+								if(desvelarMinas.isMina()) {
+									boton = botonera.getButton(mina);
+									boton.setText(desvelarMinas.getMensaje());
+									boton.setBackground(new Color(234,98,98));
+								}
 								boton = botonera.getButton(new Coordenada(k, k2));
-								boton.setEnabled(false);
 								this.terminado = true;
 							}
 						}
-						jPanelReiniciar.setVisible(true);
 					}
 				}
 					
-				//Y aqui desvelas o no el boton
-//				botonera.getButton(coordenada).setText(veloPosicion);
 			}
 		}
 	}
@@ -89,6 +104,10 @@ public class ParaUI extends UI {
 							
 							controlador.desvelarCasillas(coordenada2);
 							pintaBotones(controlador.getRespuestaDesvelo());
+//							if(terminado) {
+//								botonera.setVisible(false);
+//								addReinicio();
+//							}
 						}
 							
 						if(e.getButton()==3 && terminado == false) {
