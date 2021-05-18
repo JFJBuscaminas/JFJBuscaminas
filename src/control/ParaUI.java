@@ -21,6 +21,7 @@ public class ParaUI extends UI {
 
 	private Controlador controlador;
 	private boolean terminado = false;
+	private boolean reiniciarBotonera = false;
 
 	public ParaUI() {
 		super();
@@ -41,6 +42,7 @@ public class ParaUI extends UI {
 //			}
 //		});
 //	}
+//	
 	private void jugar() {
 		
 		getBtnIniciar().addActionListener(new ActionListener() {
@@ -54,6 +56,7 @@ public class ParaUI extends UI {
 				controlador.crearTablero(dificultad.getLongitud(), densidad.getPorcentaje());
 				addBotones(dificultad.getLongitud());
 				asociarBotones();
+//				Reiniciar();
 				
 			}
 		});	
@@ -78,7 +81,6 @@ public class ParaUI extends UI {
 									boton.setText(desvelarMinas.getMensaje());
 									boton.setBackground(new Color(234,98,98));
 								}
-								boton = botonera.getButton(new Coordenada(k, k2));
 								this.terminado = true;
 							}
 						}

@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 
 public class UI extends JFrame {
 	
-	private JPanel contentPane;
+	public JPanel contentPane;
 	public JPanelOpciones jPanelOpciones;
 	public JPanelReiniciar jPanelReiniciar;
 	private JTextField textField;
@@ -54,11 +54,11 @@ public class UI extends JFrame {
 		botonera = new Botonera(longitud);
 		contentPane.add(botonera, BorderLayout.CENTER);
 		contentPane.revalidate();
+		
 	}
 	public void addReinicio() {
 		jPanelReiniciar = new JPanelReiniciar();
 		contentPane.add(jPanelReiniciar, BorderLayout.CENTER);
-		contentPane.revalidate();
 	}
 
 	public void tomaValores(Densidad densidad, Dificultad dificultad) {
